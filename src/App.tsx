@@ -8,7 +8,7 @@ import SearchBar from "./components/SearchBar";
 
 
 
-function App(){
+export default function App(){
 
     const [searchCharacter, setSearchCharacter] = useState("");
   const [characters, setCharacters] = useState<Character[]>([])
@@ -26,57 +26,67 @@ function App(){
         })
     console.log(characters)
   }
-    // setCharacters(RICK_AND_MORTY_CHARACTERS)
 
-  const filtered = () => {
+/*
+      let newList = characters;
 
       let uniqueNames = new Set<string>()
       characters.map((characterItem) => {
               uniqueNames.add(characterItem.name.toLowerCase())
           }
       )
+
       if (uniqueNames.has(searchCharacter.toLowerCase())) {
-          return characters.filter((character) => {
+          newList = characters.filter((character) => {
               return character.name.toLowerCase() === searchCharacter.toLowerCase()
           })
       } else {
 
           if (searchCharacter.toLowerCase() === "alive") {
-              return characters.filter((character) => {
-                  return character.status === "Alive"
+              newList = characters.filter((character) => {
+                  return character.status.toLowerCase() === "alive"
               })
           }
           if (searchCharacter.toLowerCase() === "dead") {
-              return characters.filter((character) => {
-                  return character.status === "Dead"
+              newList = characters.filter((character) => {
+                  return character.status.toLowerCase() === "dead"
               })
           }
           if (searchCharacter.toLowerCase() === "human") {
-              return characters.filter((character) => {
-                  return character.species === "human"
+              newList = characters.filter((character) => {
+                  return character.species.toLowerCase() === "human"
               })
           }
           if (searchCharacter.toLowerCase() === "nohuman") {
-              return characters.filter((character) => {
-                  return character.species !== "human"
+              newList = characters.filter((character) => {
+                  return character.species.toLowerCase() !== "human"
               })
           }
           if (searchCharacter.toLowerCase() === "male") {
-              return characters.filter((character) => {
-                  return character.gender === "male"
+              newList = characters.filter((character) => {
+                  return character.gender.toLowerCase() === "male"
               })
           }
           if (searchCharacter.toLowerCase() === "female") {
-              return characters.filter((character) => {
-                  return character.gender === "female"
+              newList = characters.filter((character) => {
+                  return character.gender.toLowerCase() === "female"
               })
           }
       }
-  }
+      setCharacters(newList)*/
+
+    const filteredCharacters = characters.filter((character) => {
+        if(character.name.toLowerCase().includes(searchCharacter.toLowerCase())){
+            return true
+        }
+        return false
+    })
+
 
   function agentFunction(searchText: string){
       setSearchCharacter(searchText)
   }
+
 
   return (
       <div className="App">
@@ -87,10 +97,9 @@ function App(){
               <SearchBar searchTextFunction={agentFunction}/>
           </div>
         <div className ="charactersList">
-          <CharacterGalleryComponent characterItems={RICK_AND_MORTY_CHARACTERS}/>
+          <CharacterGalleryComponent characterItems={filteredCharacters}/>
         </div>
       </div>
   );
 }
 
-export default App;
