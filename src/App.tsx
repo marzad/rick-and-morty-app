@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import {Character} from "../../untitled1/src/models/Character";
+import CharacterGalleryComponent from "./components/CharacterGalleryComponent";
+import "./css/App.css"
 
-function App() {
+
+
+function App(){
+
+
+  const [characters, setCharacters] = useState<Character[]>([])
+
+  useEffect(() => {
+    getCharacters()
+  },[])
+
+  function getCharacters(){
+    axios.get("https://rickandmortyapi.com/api/character")
+        .then((response) => {
+          //console.log(response.data.results)
+          setCharacters(response.data.results)
+        })
+    console.log(characters)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+
+
+        <h1 className={"siteTitle"}>Rick and Morty App</h1>
+        <br/>
+        {/*        <div>
+            {CounterExample()}
+        </div>*/}
+
+
+        <div className ="charactersList">
+
+          <CharacterGalleryComponent characterItems={characters}/>
+
+        </div>
+      </div>
   );
 }
 
