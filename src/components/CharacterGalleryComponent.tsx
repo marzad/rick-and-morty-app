@@ -13,6 +13,7 @@ type CharactersGalleryProps = {
 export default function CharacterGalleryComponent(props: CharactersGalleryProps){
 
 
+    //der state kann hier eine const sein
     let [filteredCharacter, setFilteredCharacter] = useState(props.characterItems);
 
     function deleteCharacter(id: number) {
@@ -24,6 +25,7 @@ export default function CharacterGalleryComponent(props: CharactersGalleryProps)
         setFilteredCharacter(characters)
     }
 
+    //bitte sinnvolle Variabel Namen wählen
     const a = filteredCharacter.map((characterItem, index) => {
                 return <CharacterCardComponent characterItem={characterItem} key={index} deleteFunction={deleteCharacter}/>
             }
