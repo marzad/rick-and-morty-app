@@ -21,12 +21,14 @@ export default function App(){
   function getCharacters(){
     axios.get("https://rickandmortyapi.com/api/character")
         .then((response) => {
+            //auskommentierten code entfernen
           //console.log(response.data.results)
           setCharacters(response.data.results)
         })
+    //console.logs entfernen
     console.log(characters)
   }
-
+//auskommentierten code entfernen
 /*
       let newList = characters;
 

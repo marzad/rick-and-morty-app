@@ -12,6 +12,7 @@ export default function SearchBar(props: SearchBarProps){
     })
 
     return (
+        //am besten gibts du auch value an müsstest dafür den wert über die props weiter geben oder die komponenten hirachie ändern
         <input onChange={onSearchTextChange}/>
     )
 
